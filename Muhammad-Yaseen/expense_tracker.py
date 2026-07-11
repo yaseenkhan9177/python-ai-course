@@ -1,15 +1,15 @@
-#daily buget and expanse tracker
+# Daily Budget and Expense Tracker
 
 total_budget =10000  #storing integer type
 
-food_expense = 2000.0
-travel_expense = 3000.0
-extra_expense = 1500.0
+food_expenses = 2000.0
+travel_expenses = 3000.0
+extra_expensese = 1500.0
 
-total_expense = food_expense + travel_expense + extra_expense
+total_expense = food_expenses + travel_expenses + extra_expensese
 
-remaining_blance = total_budget - total_expense
+remaining_balance = total_budget - total_expense
 
 #reaming money
 print("total Expenses : ",total_expense)
-print("remaining blance : ", remaining_blance)
+print("remaining blance : ", remaining_balance)
