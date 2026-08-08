@@ -1,0 +1,127 @@
+class BankAccount:
+
+    def __init__(self, name, account_num, balance, pincode):
+
+        self.set_name(name)
+
+        self.__account_num = account_num
+
+        if balance >= 0:
+            self.__balance = balance
+        else:
+            print("Invalid initial balance!")
+            self.__balance = 0
+
+        if self.__is_valid_pin(pincode):
+            self.__pincode = pincode
+        else:
+            print("Invalid PIN! PIN must contain exactly 4 digits.")
+            self.__pincode = None
+
+    def set_name(self, name):
+        if name != "":
+            self.__name = name
+        else:
+            print("Invalid name!")
+
+    # Getter for name
+    def get_name(self):
+        return self.__name
+
+    def get_account_number(self):
+        return self.__account_num
+
+    def get_balance(self):
+        return self.__balance
+
+    def deposit(self, amount):
+
+        if amount > 0:
+            self.__balance += amount
+            print(f"Deposited {amount} successfully.")
+        else:
+            print("Deposit amount must be greater than zero.")
+
+    def withdraw(self, amount):
+
+        if amount <= 0:
+            print("Withdrawal amount must be greater than zero.")
+
+        elif amount > self.__balance:
+            print("Error: Insufficient funds!")
+
+        else:
+            self.__balance -= amount
+            print(f"Withdrew {amount} successfully.")
+
+    def __is_valid_pin(self, pin):
+
+        if len(pin) == 4 and pin.isdigit():
+            return True
+        else:
+            return False
+
+    def verify_pin(self, entered_pin):
+        return entered_pin == self.__pincode
+
+    def change_pin(self, old_pin, new_pin):
+
+        if not self.verify_pin(old_pin):
+            print("Error: Old PIN is incorrect.")
+            return
+
+        if not self.__is_valid_pin(new_pin):
+            print("Error: New PIN must be exactly 4 digits.")
+            return
+
+        self.__pincode = new_pin
+        print("PIN changed successfully.")
+
+
+
+data = BankAccount(
+    "Yaseen",
+    "2349082",
+    1000,
+    "1234"
+)
+
+print("Name:", data.get_name())
+print("Account Number:", data.get_account_number())
+print("Balance:", data.get_balance())
+
+
+data.deposit(500)
+
+print("Balance after deposit:", data.get_balance())
+
+data.deposit(-100)
+
+print("Balance after invalid deposit:", data.get_balance())
+
+
+data.withdraw(200)
+
+print("Balance after withdrawal:", data.get_balance())
+
+data.withdraw(-100)
+
+print("Balance after invalid withdrawal:", data.get_balance())
+
+data.withdraw(50000)
+
+print("Balance after insufficient withdrawal:", data.get_balance())
+
+
+print("Correct PIN:", data.verify_pin("1234"))
+
+print("Wrong PIN:", data.verify_pin("9999"))
+
+
+
+data.change_pin("1234", "5678")
+
+print("New PIN correct:", data.verify_pin("5678"))
+
+
+data.change_pin("5678", "123")
